@@ -1,16 +1,26 @@
 package com.noedominguez.class_orchestration.restapi.models
 
-case class UserEntity(id: Option[Long], username: String, password: String) {
-  require(!username.isEmpty, "username.empty")
+case class UserEntity(id: Option[Long],
+                      name: String,
+                      password: String,
+                      isAdmin: Boolean,
+                      teamId: Option[Long]) {
+
+  require(!name.isEmpty, "name.empty")
   require(!password.isEmpty, "password.empty")
 }
 
-case class UserEntityUpdate(username: Option[String] = None, password: Option[String] = None) {
+case class UserEntityUpdate(name: Option[String] = None,
+                            password: Option[String] = None,
+                            isAdmin: Option[Boolean] = None,
+                            teamId: Option[Long] = None) {
 
   def merge(user: UserEntity): UserEntity = {
     UserEntity(user.id,
-      username.getOrElse(user.username),
-      password.getOrElse(user.password)
+      name.getOrElse(user.name),
+      password.getOrElse(user.password),
+      isAdmin.getOrElse(user.isAdmin),
+      Some(teamId).getOrElse(user.teamId)
     )
   }
 

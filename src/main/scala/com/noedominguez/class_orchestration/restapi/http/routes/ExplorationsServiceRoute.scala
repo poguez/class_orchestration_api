@@ -2,8 +2,8 @@ package com.noedominguez.class_orchestration.restapi.http.routes
 
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.model.StatusCodes
-import com.noedominguez.class_orchestration.restapi.services.TeamsService
-import com.noedominguez.class_orchestration.restapi.models.{TeamEntity, TeamEntityUpdate}
+import com.noedominguez.class_orchestration.restapi.services.ExplorationsService
+import com.noedominguez.class_orchestration.restapi.models.{ExplorationEntity, ExplorationEntityUpdate}
 import de.heikoseeberger.akkahttpcirce.{CirceSupport, FailFastCirceSupport}
 
 import io.circe.generic.auto._
@@ -11,27 +11,24 @@ import io.circe.syntax._
 
 import scala.concurrent.ExecutionContext
 
-
-
-
-class TeamsServiceRoute(teamsService: TeamsService)(implicit executionContext: ExecutionContext)
+class ExplorationsServiceRoute(explorationsService: ExplorationsService)(implicit executionContext: ExecutionContext)
   extends FailFastCirceSupport {
   import StatusCodes._
-  import teamsService._
+  import explorationsService._
 
-  val route = pathPrefix("team") {
+  val route = pathPrefix("exploration") {
     pathEndOrSingleSlash {
       get {
-        complete(getTeams().map(_.asJson))
+        complete(getExplorations().map(_.asJson))
       }
     }
 
     pathPrefix("new") {
       pathEndOrSingleSlash {
         post{
-          entity(as[TeamEntity]){
+          entity(as[ExplorationEntity]){
             newUser =>
-              complete(createTeam(newUser).map(_.asJson))
+              complete(createExploration(newUser).map(_.asJson))
           }
         }
       }
@@ -39,15 +36,15 @@ class TeamsServiceRoute(teamsService: TeamsService)(implicit executionContext: E
     pathPrefix(IntNumber) { id =>
       pathEndOrSingleSlash {
         get {
-          complete(getTeamById(id).map(_.asJson))
+          complete(getExplorationById(id).map(_.asJson))
         } ~
           post {
-            entity(as[TeamEntityUpdate]) { userUpdate =>
-              complete(updateTeam(id, userUpdate).map(_.asJson))
+            entity(as[ExplorationEntityUpdate]) { userUpdate =>
+              complete(updateExploration(id, userUpdate).map(_.asJson))
             }
           } ~
           delete {
-            onSuccess(deleteTeam(id)) { ignored =>
+            onSuccess(deleteExploration(id)) { ignored =>
               complete(NoContent)
             }
           }

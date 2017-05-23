@@ -14,7 +14,7 @@ class UsersService(val databaseService: DatabaseService)(implicit executionConte
 
   def getUserById(id: Long): Future[Option[UserEntity]] = db.run(users.filter(_.id === id).result.headOption)
 
-  def getUserByLogin(login: String): Future[Option[UserEntity]] = db.run(users.filter(_.username === login).result.headOption)
+  def getUserByLogin(login: String): Future[Option[UserEntity]] = db.run(users.filter(_.name === login).result.headOption)
 
   def createUser(user: UserEntity): Future[UserEntity] = db.run(users returning users += user)
 

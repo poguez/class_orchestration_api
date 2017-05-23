@@ -9,7 +9,7 @@ trait TeamEntityTable {
   import databaseService.driver.api._
 
   class Teams(tag: Tag) extends Table[TeamEntity](tag, "teams"){
-    def id = column[Long]("id")
+    def id = column[Option[Long]]("id", O.PrimaryKey, O.AutoInc)
     def name = column[Option[String]]("name")
     def rights = column[Option[String]]("rights")
     def objectId = column[Option[Long]]("objectId")

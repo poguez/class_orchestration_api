@@ -1,8 +1,6 @@
 package com.noedominguez.class_orchestration.restapi.models
 
-//import java.util.UUID
-
-case class TeamEntity(id: Long,
+case class TeamEntity(id: Option[Long],
                       name: Option[String] = None,
                       rights: Option[String] = None,
                       objectId: Option[Long] = None,

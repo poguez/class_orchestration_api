@@ -10,10 +10,12 @@ trait UserEntityTable {
 
   class Users(tag: Tag) extends Table[UserEntity](tag, "users") {
     def id = column[Option[Long]]("id", O.PrimaryKey, O.AutoInc)
-    def username = column[String]("name")
+    def name = column[String]("name")
     def password = column[String]("password")
+    def isAdmin = column[Boolean]("isAdmin")
+    def teamId = column[Option[Long]]("teamId")
 
-    def * = (id, username, password) <> ((UserEntity.apply _).tupled, UserEntity.unapply)
+    def * = (id, name, password, isAdmin, teamId) <> ((UserEntity.apply _).tupled, UserEntity.unapply)
   }
 
   protected val users = TableQuery[Users]

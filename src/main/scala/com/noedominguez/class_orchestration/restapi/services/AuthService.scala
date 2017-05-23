@@ -13,7 +13,7 @@ class AuthService(val databaseService: DatabaseService)(usersService: UsersServi
   import databaseService.driver.api._
 
   def signIn(login: String, password: String): Future[Option[TokenEntity]] = {
-    db.run(users.filter(u => u.username === login).result).flatMap { users =>
+    db.run(users.filter(u => u.name === login).result).flatMap { users =>
       users.find(user => user.password == password) match {
         case Some(user) => db.run(tokens.filter(_.userId === user.id).result.headOption).flatMap {
           case Some(token) => Future.successful(Some(token))
