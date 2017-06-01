@@ -50,8 +50,8 @@ flywayUrl := "jdbc:h2:file:./target/foobar"
 flywayUser := "SA"
 
 Revolver.settings
-//enablePlugins(JavaAppPackaging)
-//enablePlugins(DockerPlugin)
+enablePlugins(JavaAppPackaging)
+enablePlugins(DockerPlugin)
 
-//dockerExposedPorts := Seq(9000)
-//dockerEntrypoint := Seq("bin/%s" format executableScriptName.value, "-Dconfig.resource=docker.conf")
+dockerExposedPorts := Seq(9000)
+dockerEntrypoint := Seq("bin/%s" format executableScriptName.value, "-Dconfig.resource=docker.conf")
