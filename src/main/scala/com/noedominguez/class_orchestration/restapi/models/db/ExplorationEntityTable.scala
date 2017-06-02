@@ -10,10 +10,10 @@ trait ExplorationEntityTable {
 
   class Exploration(tag: Tag) extends Table[ExplorationEntity](tag, "explorations"){
     def id = column[Option[Long]]("id", O.PrimaryKey, O.AutoInc)
-    def objectId = column[Option[Long]]("teacher_id")
-    def explorationId = column[Option[Long]]("exploration_object_id")
+    def teacherId = column[Option[Long]]("teacherId")
+    def explorationObjectId = column[Option[Long]]("explorationObjectId")
 
-    def * = (id, objectId, explorationId) <> ((ExplorationEntity.apply _).tupled, ExplorationEntity.unapply)
+    def * = (id, teacherId, explorationObjectId) <> ((ExplorationEntity.apply _).tupled, ExplorationEntity.unapply)
 
   }
 
