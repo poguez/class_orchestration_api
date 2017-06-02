@@ -24,8 +24,7 @@ class TeamsServiceRoute(teamsService: TeamsService)(implicit executionContext: E
       get {
         complete(getTeams().map(_.asJson))
       }
-    }
-
+    } ~
     pathPrefix("new") {
       pathEndOrSingleSlash {
         post{
