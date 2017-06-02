@@ -1,7 +1,7 @@
 CREATE TABLE "teams" (
   "id"      BIGSERIAL PRIMARY KEY,
   "name" VARCHAR,
-  "rights"   BOOLEAN,
+  "rights"   VARCHAR,
   "objectId"   BIGINT,
   "explorationId" BIGINT
 );

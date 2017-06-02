@@ -8,7 +8,7 @@ services:
       image: classorchestrationapi:1.0.0
       environment:
         PORT: 9000
-        PSQL_URL: 'jdbc:postgresql://db:5432/class-orchestration-api'
+        PSQL_URL: 'jdbc:postgresql://db:5432/class_orchestration_api'
         PSQL_USER: 'postgres'
         PSQL_PASSWORD: 'password'
         DB_PASSWORD: 'password'
