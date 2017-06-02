@@ -21,8 +21,7 @@ class ExplorationsServiceRoute(explorationsService: ExplorationsService)(implici
       get {
         complete(getExplorations().map(_.asJson))
       }
-    }
-
+    } ~
     pathPrefix("new") {
       pathEndOrSingleSlash {
         post{
@@ -38,16 +37,16 @@ class ExplorationsServiceRoute(explorationsService: ExplorationsService)(implici
         get {
           complete(getExplorationById(id).map(_.asJson))
         } ~
-          post {
-            entity(as[ExplorationEntityUpdate]) { userUpdate =>
-              complete(updateExploration(id, userUpdate).map(_.asJson))
-            }
-          } ~
-          delete {
-            onSuccess(deleteExploration(id)) { ignored =>
-              complete(NoContent)
-            }
+        post {
+          entity(as[ExplorationEntityUpdate]) { userUpdate =>
+            complete(updateExploration(id, userUpdate).map(_.asJson))
           }
+        } ~
+        delete {
+          onSuccess(deleteExploration(id)) { ignored =>
+            complete(NoContent)
+          }
+        }
       }
     }
   }
