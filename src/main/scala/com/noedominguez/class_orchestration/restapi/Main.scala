@@ -1,6 +1,6 @@
 package com.noedominguez.class_orchestration.restapi
 
-import com.noedominguez.class_orchestration.restapi.services.{AuthService, TeamsService, UsersService, ExplorationsService}
+import com.noedominguez.class_orchestration.restapi.services.{AuthService, TeamsService, UsersService, ExplorationsService, ExplorationObjectsService}
 import akka.actor.ActorSystem
 import akka.event.{Logging, LoggingAdapter}
 import akka.http.scaladsl.Http
@@ -26,8 +26,9 @@ object Main extends App with Config {
   val authService = new AuthService(databaseService)(usersService)
   val teamsService= new TeamsService(databaseService)
   val explorationsService= new ExplorationsService(databaseService)
+  val explorationObjectsService= new ExplorationObjectsService(databaseService)
 
-  val httpService = new HttpService(usersService, authService, teamsService, explorationsService)
+  val httpService = new HttpService(usersService, authService, teamsService, explorationsService,explorationObjectsService)
 
   Http().bindAndHandle(httpService.routes, httpHost, httpPort)
 }

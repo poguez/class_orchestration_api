@@ -1,5 +1,5 @@
 CREATE TABLE "explorationObjects" (
   "id"      BIGSERIAL PRIMARY KEY,
-  "objectState" JSON,
+  "objectState" VARCHAR,
   "modelName" VARCHAR
 );
