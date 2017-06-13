@@ -48,6 +48,11 @@ class ExplorationsServiceRoute(explorationsService: ExplorationsService)(implici
             complete(updateExploration(id, userUpdate).map(_.asJson))
           }
         } ~
+        put {
+          entity(as[ExplorationEntityUpdate]) { userUpdate =>
+            complete(updateExploration(id, userUpdate).map(_.asJson))
+          }
+        } ~
         delete {
           onSuccess(deleteExploration(id)) { ignored =>
             complete(NoContent)

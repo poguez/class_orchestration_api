@@ -51,6 +51,11 @@ class TeamsServiceRoute(teamsService: TeamsService)(implicit executionContext: E
               complete(updateTeam(id, userUpdate).map(_.asJson))
             }
           } ~
+          put {
+            entity(as[TeamEntityUpdate]) { userUpdate =>
+              complete(updateTeam(id, userUpdate).map(_.asJson))
+            }
+          } ~
           delete {
             onSuccess(deleteTeam(id)) { ignored =>
               complete(NoContent)

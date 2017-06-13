@@ -66,6 +66,11 @@ import usersService._
             complete(updateUser(id, userUpdate).map(_.asJson))
           }
         } ~
+        put {
+          entity(as[UserEntityUpdate]) { userUpdate =>
+            complete(updateUser(id, userUpdate).map(_.asJson))
+          }
+        } ~
         delete {
           onSuccess(deleteUser(id)) { ignored =>
             complete(NoContent)
