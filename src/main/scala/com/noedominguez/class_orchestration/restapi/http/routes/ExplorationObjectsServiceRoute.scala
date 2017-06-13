@@ -29,7 +29,7 @@ class ExplorationObjectsServiceRoute(explorationsService: ExplorationObjectsServ
               complete(createExplorationObject(newExplorationObject).map(_.asJson))
           }
         }~
-        post{
+        put{
           entity(as[ExplorationObjectEntity]){
             newExplorationObject =>
               complete(createExplorationObject(newExplorationObject).map(_.asJson))
