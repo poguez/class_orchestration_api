@@ -32,6 +32,12 @@ class TeamsServiceRoute(teamsService: TeamsService)(implicit executionContext: E
             newUser =>
               complete(createTeam(newUser).map(_.asJson))
           }
+        }~
+        put{
+          entity(as[TeamEntity]){
+            newUser =>
+              complete(createTeam(newUser).map(_.asJson))
+          }
         }
       }
     } ~

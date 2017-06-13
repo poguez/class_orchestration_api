@@ -29,6 +29,12 @@ class ExplorationsServiceRoute(explorationsService: ExplorationsService)(implici
             newUser =>
               complete(createExploration(newUser).map(_.asJson))
           }
+        }~
+        post{
+          entity(as[ExplorationEntity]){
+            newUser =>
+              complete(createExploration(newUser).map(_.asJson))
+          }
         }
       }
     } ~

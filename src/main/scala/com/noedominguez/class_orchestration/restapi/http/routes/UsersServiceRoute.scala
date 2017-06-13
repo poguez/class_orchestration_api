@@ -32,17 +32,23 @@ import usersService._
           get {
             complete(loggedUser)
           } ~
-            post {
-              entity(as[UserEntityUpdate]) { userUpdate =>
-                complete(updateUser(loggedUser.id.get, userUpdate).map(_.asJson))
-              }
+          post {
+            entity(as[UserEntityUpdate]) { userUpdate =>
+              complete(updateUser(loggedUser.id.get, userUpdate).map(_.asJson))
             }
+          }
         }
       }
     } ~
     pathPrefix("new") {
       pathEndOrSingleSlash {
         post{
+          entity(as[UserEntity]){
+            newUser =>
+              complete(createUser(newUser).map(_.asJson))
+          }
+        }~
+        put{
           entity(as[UserEntity]){
             newUser =>
               complete(createUser(newUser).map(_.asJson))
