@@ -12,8 +12,9 @@ trait ExplorationEntityTable {
     def id = column[Option[Long]]("id", O.PrimaryKey, O.AutoInc)
     def teacherId = column[Option[Long]]("teacherId")
     def explorationObjectId = column[Option[Long]]("explorationObjectId")
+    def explorationMode = column[Option[Int]]("explorationMode")
 
-    def * = (id, teacherId, explorationObjectId) <> ((ExplorationEntity.apply _).tupled, ExplorationEntity.unapply)
+    def * = (id, teacherId, explorationObjectId, explorationMode) <> ((ExplorationEntity.apply _).tupled, ExplorationEntity.unapply)
 
   }
 
