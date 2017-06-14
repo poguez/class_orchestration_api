@@ -13,7 +13,7 @@ class ExplorationObjectsService(val databaseService: DatabaseService)(implicit e
   import databaseService.driver.api._
 
   def getExplorationObjects(): Future[Seq[ExplorationObjectEntity]] =
-    db.run(explorationObjects.result)
+    db.run(explorationObjects.sortBy(_.id.asc.nullsFirst).result)
 
   def getExplorationObjectById(id: Long): Future[Option[ExplorationObjectEntity]] =
     db.run(explorationObjects.filter(_.id === id).result.headOption)

@@ -10,7 +10,7 @@ class UsersService(val databaseService: DatabaseService)(implicit executionConte
   import databaseService._
   import databaseService.driver.api._
 
-  def getUsers(): Future[Seq[UserEntity]] = db.run(users.result)
+  def getUsers(): Future[Seq[UserEntity]] = db.run(users.sortBy(_.id.asc.nullsFirst).result)
 
   def getUserById(id: Long): Future[Option[UserEntity]] = db.run(users.filter(_.id === id).result.headOption)
 

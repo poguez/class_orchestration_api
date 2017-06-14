@@ -11,7 +11,7 @@ class ExplorationsService(val databaseService: DatabaseService)(implicit executi
   import databaseService._
   import databaseService.driver.api._
 
-  def getExplorations(): Future[Seq[ExplorationEntity]] = db.run(explorations.result)
+  def getExplorations(): Future[Seq[ExplorationEntity]] = db.run(explorations.sortBy(_.id.asc.nullsFirst).result)
 
   def getExplorationById(id: Long): Future[Option[ExplorationEntity]] = db.run(explorations.filter(_.id === id).result.headOption)
 

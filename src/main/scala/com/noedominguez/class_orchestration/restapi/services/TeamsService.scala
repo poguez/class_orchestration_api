@@ -10,7 +10,7 @@ class TeamsService(val databaseService: DatabaseService)(implicit executionConte
   import databaseService._
   import databaseService.driver.api._
 
-  def getTeams(): Future[Seq[TeamEntity]] = db.run(teams.result)
+  def getTeams(): Future[Seq[TeamEntity]] = db.run(teams.sortBy(_.id.asc.nullsFirst).result)
 
   def getTeamById(id: Long): Future[Option[TeamEntity]] = db.run(teams.filter(_.id === id).result.headOption)
 
